@@ -10,12 +10,13 @@ package pkg2playersnake;
  * @author S331460873
  */
 public class LoseScreen extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form LoseScreen
      */
     public LoseScreen() {
-        initComponents();
+        initComponents(); 
+        
     }
 
     /**
