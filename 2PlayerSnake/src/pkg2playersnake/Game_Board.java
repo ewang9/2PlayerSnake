@@ -22,8 +22,8 @@ import javax.swing.Timer;
 
 public class Game_Board extends JPanel implements ActionListener{
     
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
+    private final int B_WIDTH = 600;
+    private final int B_HEIGHT = 600;
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
@@ -64,18 +64,18 @@ public class Game_Board extends JPanel implements ActionListener{
     
     private void loadImages(){
         
-        ImageIcon iid = new ImageIcon("src/resources/dot.png");
+        ImageIcon iid = new ImageIcon("src/images/ball.png");
         ball = iid.getImage();
         
-        ImageIcon iia = new ImageIcon("src/resources/apple.png");
+        ImageIcon iia = new ImageIcon("src/images/apple.png");
         apple = iia.getImage();
         
-        ImageIcon iih = new ImageIcon("src/resources/head.png");
+        ImageIcon iih = new ImageIcon("src/images/head.png");
         head = iih.getImage();            
 }
     private void initGame(){
         
-        dots = 3;
+        dots = 2;
         
         for (int z = 0; z < dots; z++){
             x[z] = 50 - z *10;
@@ -88,8 +88,8 @@ public class Game_Board extends JPanel implements ActionListener{
         timer.start();
     }
     
-    //@Override
-    public void paintCompononent(Graphics g){
+    @Override
+    public void paintComponent(Graphics g){
         super.paintComponent(g);
         
         doDrawing(g);
@@ -97,13 +97,13 @@ public class Game_Board extends JPanel implements ActionListener{
     
     private void doDrawing(Graphics g){
         if (inGame){
-            g.drawImage(apple, apple_x, apple_y, this);
+            g.drawImage(apple, apple_x, apple_y, 50, 50, this);
             
             for (int z = 0; z<dots; z++){
                 if (z==0){
-                    g.drawImage(head, x[z], y[z], this);
+                    g.drawImage(head, x[z], y[z],25, 25, this);
                 }else{
-                    g.drawImage(ball, x[z], y[z], this);
+                    g.drawImage(ball, x[z], y[z], 25,25,  this);
                 }
             }
             
@@ -188,8 +188,8 @@ public class Game_Board extends JPanel implements ActionListener{
     }
     
 private class TAdapter extends KeyAdapter {
-    //@Override
-    public void keyPresses(KeyEvent e){
+    @Override
+    public void keyPressed(KeyEvent e){
         
         int key = e.getKeyCode();
         
