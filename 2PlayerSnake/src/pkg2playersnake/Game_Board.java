@@ -64,13 +64,13 @@ public class Game_Board extends JPanel implements ActionListener{
     
     private void loadImages(){
         
-        ImageIcon iid = new ImageIcon("src/resources/dot.png");
+        ImageIcon iid = new ImageIcon("src/BodyDot.png");
         ball = iid.getImage();
         
-        ImageIcon iia = new ImageIcon("src/resources/apple.png");
+        ImageIcon iia = new ImageIcon("src/apple.png");
         apple = iia.getImage();
         
-        ImageIcon iih = new ImageIcon("src/resources/head.png");
+        ImageIcon iih = new ImageIcon("src/HeadDotpng");
         head = iih.getImage();            
 }
     private void initGame(){
