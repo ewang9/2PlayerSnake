@@ -5,17 +5,33 @@
  */
 package pkg2playersnake;
 
-/**
- *
- * @author S331460873
- */
-public class Main {
+import java.awt.EventQueue;
+import javax.swing.JFrame;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Main extends JFrame {
+    
+    public Main(){
+        initUI();
+    }
+    private void initUI(){
+        add (new Game_Board());
+        
+        setResizable(false);
+        pack();
+        
+        setTitle("2 Player Snake");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        EventQueue.invokeLater(() -> {
+            JFrame ex = new Main();
+            ex.setVisible(true);
+            
+        });
+    
+    }
     }
     
-}
+
