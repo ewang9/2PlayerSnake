@@ -71,7 +71,11 @@ public class Game_Board extends JPanel implements ActionListener{
         apple = iia.getImage();
         
         ImageIcon iih = new ImageIcon("src/images/head.png");
-        head = iih.getImage();            
+        head = iih.getImage();     
+        
+        ImageIcon iid2 = new ImageIcon("src/images/body2.png");
+        
+        ImageIcon iih2 = new ImageIcon("src/images/head2.png");
 }
     private void initGame(){
         
