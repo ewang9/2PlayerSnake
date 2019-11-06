@@ -37,7 +37,7 @@ public class Game_Board extends JPanel implements ActionListener{
     private int apple_y;
     
     private boolean leftDirection = false;
-    private boolean rightDirection = true;
+    private boolean rightDirection = false;
     private boolean upDirection = false;
     private boolean downDirection = false;
     private boolean inGame = true;
@@ -63,7 +63,7 @@ public class Game_Board extends JPanel implements ActionListener{
     }
     
     private void loadImages(){
-        
+
         ImageIcon iid = new ImageIcon("src/images/ball.png");
         ball = iid.getImage();
         
