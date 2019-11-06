@@ -22,12 +22,12 @@ import javax.swing.Timer;
 
 public class Game_Board extends JPanel implements ActionListener{
     
-    private final int B_WIDTH = 600;
-    private final int B_HEIGHT = 600;
+    private final int B_WIDTH = 450;
+    private final int B_HEIGHT = 450;
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
-    private final int DELAY = 140;
+    private final int DELAY = 70;
     
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
@@ -64,7 +64,7 @@ public class Game_Board extends JPanel implements ActionListener{
     
     private void loadImages(){
 
-        ImageIcon iid = new ImageIcon("src/images/ball.png");
+        ImageIcon iid = new ImageIcon("src/images/body.png");
         ball = iid.getImage();
         
         ImageIcon iia = new ImageIcon("src/images/apple.png");
@@ -97,13 +97,13 @@ public class Game_Board extends JPanel implements ActionListener{
     
     private void doDrawing(Graphics g){
         if (inGame){
-            g.drawImage(apple, apple_x, apple_y, 50, 50, this);
+            g.drawImage(apple, apple_x, apple_y, 20, 20, this);
             
             for (int z = 0; z<dots; z++){
                 if (z==0){
                     g.drawImage(head, x[z], y[z],25, 25, this);
                 }else{
-                    g.drawImage(ball, x[z], y[z], 25,25,  this);
+                    g.drawImage(ball, x[z], y[z], 15,15,  this);
                 }
             }
             
@@ -122,6 +122,14 @@ public class Game_Board extends JPanel implements ActionListener{
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg))/2, B_HEIGHT / 2);
+        
+        String msg1 = "Player 1 Score =  "+((dots-2)*10);
+        Font small2 = new Font("Times New Roman", Font.BOLD, 12);
+        FontMetrics metr1 = getFontMetrics(small);
+        
+        g.setColor(Color.white);
+        g.setFont(small2);
+        g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1))/2, (B_HEIGHT/2) - 50);
     }
     private void checkApple(){
         if ((x[0] == apple_x)&&(y[0] == apple_y)){
@@ -142,10 +150,10 @@ public class Game_Board extends JPanel implements ActionListener{
             x[0] += DOT_SIZE;
         }
         if (upDirection){
-            x[0] -= DOT_SIZE;
+            y[0] -= DOT_SIZE;
         }
         if (downDirection){
-            x[0] += DOT_SIZE;
+            y[0] += DOT_SIZE;
         }
 }
     private void checkCollision(){
@@ -169,6 +177,7 @@ public class Game_Board extends JPanel implements ActionListener{
         if (!inGame){
             timer.stop();
         }
+        
 }
     private void locateApple(){
         int r = (int) (Math.random() * RAND_POS);
@@ -193,25 +202,25 @@ private class TAdapter extends KeyAdapter {
         
         int key = e.getKeyCode();
         
-        if ((key == KeyEvent.VK_LEFT) && (!rightDirection)){
+        if (key == KeyEvent.VK_LEFT){
             leftDirection = true;
             rightDirection = false;
             upDirection = false;
             downDirection = false;
         }
-        if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)){
+        if (key == KeyEvent.VK_RIGHT){
             rightDirection = true;
             leftDirection = false;
             upDirection = false;
             downDirection = false;
         }
-        if ((key == KeyEvent.VK_UP) && (!downDirection)){
+        if (key == KeyEvent.VK_UP){
             upDirection = true;
             downDirection = false;
             rightDirection = false;
             leftDirection = false;
         }
-        if ((key == KeyEvent.VK_DOWN) && (!upDirection)){
+        if (key == KeyEvent.VK_DOWN){
             downDirection = true;
             upDirection = false;
             rightDirection = false;
