@@ -195,21 +195,25 @@ private class TAdapter extends KeyAdapter {
         
         if ((key == KeyEvent.VK_LEFT) && (!rightDirection)){
             leftDirection = true;
+            rightDirection = false;
             upDirection = false;
             downDirection = false;
         }
-        if ((key == KeyEvent.VK_RIGHT)&& (!leftDirection)){
+        if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)){
             rightDirection = true;
+            leftDirection = false;
             upDirection = false;
             downDirection = false;
         }
-        if ((key == KeyEvent.VK_UP)&& (!downDirection)){
+        if ((key == KeyEvent.VK_UP) && (!downDirection)){
             upDirection = true;
+            downDirection = false;
             rightDirection = false;
             leftDirection = false;
         }
-        if ((key == KeyEvent.VK_DOWN)&&(!upDirection)){
+        if ((key == KeyEvent.VK_DOWN) && (!upDirection)){
             downDirection = true;
+            upDirection = false;
             rightDirection = false;
             leftDirection = false;
             }
