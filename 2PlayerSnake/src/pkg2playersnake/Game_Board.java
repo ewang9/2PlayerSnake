@@ -135,17 +135,25 @@ public class Game_Board extends JPanel implements ActionListener{
         Font small1 = new Font("Times New Roman", Font.BOLD, 12);
         FontMetrics metr1 = getFontMetrics(small);
         
-        g.setColor(Color.white);
+        g.setColor(Color.red);
         g.setFont(small1);
-        g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1) + 30)/2, (B_HEIGHT/2) - 50);
+        g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1) + 30)/2, (B_HEIGHT/2) - 65);
         
         String msg2 = "Player 2 Score =  "+((dots-2)*10);
         Font small2 = new Font("Times New Roman", Font.BOLD, 12);
         FontMetrics metr2 = getFontMetrics(small);
         
-        g.setColor(Color.white);
+        g.setColor(Color.blue);
         g.setFont(small2);
-        g.drawString(msg2, (B_WIDTH - metr2.stringWidth(msg2) + 30)/2, (B_HEIGHT/2) - 35);
+        g.drawString(msg2, (B_WIDTH - metr2.stringWidth(msg2) + 30)/2, (B_HEIGHT/2) - 50);
+        
+        String msg3 = "Press ENTER to play again.";
+        Font large = new Font("Times New Roman", Font.BOLD, 18);
+        FontMetrics metr3 = getFontMetrics(large);
+        
+        g.setColor(Color.yellow);
+        g.setFont(large);
+        g.drawString(msg3, (B_WIDTH - metr3.stringWidth(msg3) + 16)/2, (B_HEIGHT/2) + 75);
     }
     private void checkApple(){
         if ((x[0] == apple_x)&&(y[0] == apple_y)){
