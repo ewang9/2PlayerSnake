@@ -10,11 +10,11 @@ import javax.swing.JFrame;
 
 public class Main extends JFrame {
     
-    public Main(){
-        initUI();
+    public Main(Snake s1, Snake s2){
+        initUI(s1, s2);
     }
-    private void initUI(){
-        add (new Game_Board());
+    private void initUI(Snake s1, Snake s2){
+        add (new Game_Board(s1, s2));
         
         setResizable(false);
         pack();
@@ -25,8 +25,10 @@ public class Main extends JFrame {
     }
     public static void main(String[] args) {
         
+        Snake snake1 = new Snake(87,65,83,68);
+        Snake snake2 = new Snake(38,37,40,39);
         EventQueue.invokeLater(() -> {
-            JFrame ex = new Main();
+            JFrame ex = new Main(snake1, snake2);
             ex.setVisible(true);
             
         });

@@ -25,21 +25,21 @@ public class Game_Board extends JPanel implements ActionListener{
     private final int B_WIDTH = 450;
     private final int B_HEIGHT = 450;
     private final int DOT_SIZE = 10;
-    private final int ALL_DOTS = 900;
+    //private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
     private final int DELAY = 70;
     
-    private final int x[] = new int[ALL_DOTS];
-    private final int y[] = new int[ALL_DOTS];
+    //private final int x[] = new int[ALL_DOTS];
+    //private final int y[] = new int[ALL_DOTS];
     
-    private int dots;
+    //private int dots;
     private int apple_x;
     private int apple_y;
     
-    private boolean leftDirection = false;
-    private boolean rightDirection = false;
-    private boolean upDirection = false;
-    private boolean downDirection = false;
+//    private boolean leftDirection = false;
+//    private boolean rightDirection = false;
+//    private boolean upDirection = false;
+//    private boolean downDirection = false;
     private boolean inGame = true;
     
     private Timer timer;
@@ -49,13 +49,17 @@ public class Game_Board extends JPanel implements ActionListener{
     private Image head;
     private Image head2;
     
-    public Game_Board(){
-        initGame_Board();
+    Snake[] snakes = new Snake[2];
+    
+    public Game_Board(Snake player1, Snake player2){
+        snakes[0] = player1;
+        snakes[1] = player2;
+        initGame_Board(player1, player2);
     }
     
-    private void initGame_Board(){
+    private void initGame_Board(Snake s1, Snake s2){
         
-        addKeyListener(new TAdapter());
+        addKeyListener(new TAdapter(s1, s2));
         setBackground(Color.black);
         setFocusable(true);
         
@@ -83,13 +87,14 @@ public class Game_Board extends JPanel implements ActionListener{
 }
     private void initGame(){
         
-        dots = 2;
+        //dots = 2;
         
-        for (int z = 0; z < dots; z++){
-            x[z] = 50 - z *10;
-            y[z] = 50;
+        for (Snake i: snakes) {
+            for (int z = 0; z < i.length; z++){
+                i.SnakeX[z] = 50 - z *10;
+                i.SnakeY[z] = 50;
+            }
         }
-        
         locateApple();
         
         timer = new Timer(DELAY, this);
@@ -106,15 +111,15 @@ public class Game_Board extends JPanel implements ActionListener{
     private void doDrawing(Graphics g){
         if (inGame){
             g.drawImage(apple, apple_x, apple_y, 20, 20, this);
-            
-            for (int z = 0; z<dots; z++){
-                if (z==0){
-                    g.drawImage(head, x[z], y[z],25, 25, this);
-                }else{
-                    g.drawImage(ball, x[z], y[z], 15,15,  this);
+            for (Snake i: snakes) {
+                for (int z = 0; z<i.length; z++){
+                    if (z==0){
+                        g.drawImage(head, i.SnakeX[z], i.SnakeY[z],25, 25, this);
+                    }else{
+                        g.drawImage(ball, i.SnakeX[z], i.SnakeY[z], 15,15,  this);
+                    }
                 }
             }
-            
             Toolkit.getDefaultToolkit().sync();
         }else{
             gameOver(g);
@@ -131,75 +136,77 @@ public class Game_Board extends JPanel implements ActionListener{
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg))/2, B_HEIGHT / 2);
         
-        String msg1 = "Player 1 Score =  "+((dots-2)*10);
-        Font small1 = new Font("Times New Roman", Font.BOLD, 12);
+        String msg1 = "Player 1 Score =  "+((snakes[0].length-2)*10);
+        Font small2 = new Font("Times New Roman", Font.BOLD, 12);
         FontMetrics metr1 = getFontMetrics(small);
         
         g.setColor(Color.red);
-        g.setFont(small1);
+        g.setFont(small2);
         g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1) + 30)/2, (B_HEIGHT/2) - 65);
-        
-        String msg2 = "Player 2 Score =  "+((dots-2)*10);
-        Font small2 = new Font("Times New Roman", Font.BOLD, 12);
-        FontMetrics metr2 = getFontMetrics(small);
+       
         
         g.setColor(Color.blue);
         g.setFont(small2);
-        g.drawString(msg2, (B_WIDTH - metr2.stringWidth(msg2) + 30)/2, (B_HEIGHT/2) - 50);
+        g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1))/2, (B_HEIGHT/2) - 50);
         
-        String msg3 = "Press ENTER to play again.";
-        Font large = new Font("Times New Roman", Font.BOLD, 18);
-        FontMetrics metr3 = getFontMetrics(large);
+        String msg2 = "Player 2 Score =  "+((snakes[1].length-2)*10);
         
-        g.setColor(Color.yellow);
-        g.setFont(large);
-        g.drawString(msg3, (B_WIDTH - metr3.stringWidth(msg3) + 16)/2, (B_HEIGHT/2) + 75);
+        g.setColor(Color.white);
+        g.setFont(small2);
+        g.drawString(msg2, (B_WIDTH - metr1.stringWidth(msg2))/2, (B_HEIGHT/2) - 100);
+        
     }
     private void checkApple(){
-        if ((x[0] == apple_x)&&(y[0] == apple_y)){
+        for (Snake i: snakes) {
+        if ((i.SnakeX[0] == apple_x)&&(i.SnakeY[0] == apple_y)){
             
-            dots++;
+            i.length++;
             locateApple();
+        }
         }
     }
     private void move(){
-        for (int z = dots; z>0; z--){
-            x[z] = x[(z-1)];
-            y[z] = y[(z-1)];
-        }
-        if (leftDirection){
-            x[0] -= DOT_SIZE;
-        }
-        if (rightDirection){
-            x[0] += DOT_SIZE;
-        }
-        if (upDirection){
-            y[0] -= DOT_SIZE;
-        }
-        if (downDirection){
-            y[0] += DOT_SIZE;
+        for (Snake i: snakes) {
+            for (int z = i.length; z>0; z--){
+                i.SnakeX[z] = i.SnakeX[(z-1)];
+                i.SnakeY[z] = i.SnakeY[(z-1)];
+            }
+            if (i.left){
+                i.SnakeX[0] -= DOT_SIZE;
+            }
+            if (i.right){
+                i.SnakeX[0] += DOT_SIZE;
+            }
+            if (i.up){
+               i.SnakeY[0] -= DOT_SIZE;
+            }
+            if (i.down){
+                i.SnakeY[0] += DOT_SIZE;
+            }
         }
 }
     private void checkCollision(){
-        for (int z = dots; z>0; z--){
-            if ((z>4)&&(x[0] == x[z])&& (y[0] == y[z])){
+        for (Snake i: snakes) {
+            for (int z = i.length; z>0; z--){
+                if ((z>4)&&(i.SnakeX[0] == i.SnakeX[z])&& (i.SnakeY[0] == i.SnakeY[z])){
+                    inGame = false;
+                }
+            }
+            if (i.SnakeY[0] >= B_HEIGHT){
                 inGame = false;
             }
-        }
-        if (y[0] >= B_HEIGHT){
-            inGame = false;
-        }
-        if (y[0] < 0){
-            inGame = false;
-        }
-        if (x[0] >= B_WIDTH){
-            inGame = false;
-        }
-        if (x[0] < 0){
-            inGame = false;
-        }
-        if (!inGame){
-            timer.stop();
+            if (i.SnakeY[0] < 0){
+                inGame = false;
+            }
+            if (i.SnakeX[0] >= B_WIDTH){
+                inGame = false;
+            }
+            if (i.SnakeX[0] < 0){
+                inGame = false;
+            }
+            if (!inGame){
+                timer.stop();
+            }
         }
         
 }
@@ -221,35 +228,19 @@ public class Game_Board extends JPanel implements ActionListener{
     }
     
 private class TAdapter extends KeyAdapter {
+    
+    Snake snake1;
+    Snake snake2;
+    
+    public TAdapter(Snake s1, Snake s2){
+        snake1 = s1;
+        snake2 = s2;
+    }
+    
     @Override
     public void keyPressed(KeyEvent e){
-        
-        int key = e.getKeyCode();
-        
-        if (key == KeyEvent.VK_LEFT){
-            leftDirection = true;
-            rightDirection = false;
-            upDirection = false;
-            downDirection = false;
-        }
-        if (key == KeyEvent.VK_RIGHT){
-            rightDirection = true;
-            leftDirection = false;
-            upDirection = false;
-            downDirection = false;
-        }
-        if (key == KeyEvent.VK_UP){
-            upDirection = true;
-            downDirection = false;
-            rightDirection = false;
-            leftDirection = false;
-        }
-        if (key == KeyEvent.VK_DOWN){
-            downDirection = true;
-            upDirection = false;
-            rightDirection = false;
-            leftDirection = false;
-            }
+            snake1.keyPressed(e);
+            snake2.keyPressed(e);
         }
     }
 }
