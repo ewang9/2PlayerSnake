@@ -25,21 +25,12 @@ public class Game_Board extends JPanel implements ActionListener{
     private final int B_WIDTH = 450;
     private final int B_HEIGHT = 450;
     private final int DOT_SIZE = 10;
-    //private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
     private final int DELAY = 70;
     
-    //private final int x[] = new int[ALL_DOTS];
-    //private final int y[] = new int[ALL_DOTS];
-    
-    //private int dots;
     private int apple_x;
     private int apple_y;
     
-//    private boolean leftDirection = false;
-//    private boolean rightDirection = false;
-//    private boolean upDirection = false;
-//    private boolean downDirection = false;
     private boolean inGame = true;
     
     private Timer timer;
@@ -86,8 +77,6 @@ public class Game_Board extends JPanel implements ActionListener{
         head2 = iih2.getImage();
 }
     private void initGame(){
-        
-        //dots = 2;
         
         for (Snake i: snakes) {
             for (int z = 0; z < i.length; z++){
@@ -145,9 +134,6 @@ public class Game_Board extends JPanel implements ActionListener{
         g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1) + 30)/2, (B_HEIGHT/2) - 65);
        
         
-        g.setColor(Color.blue);
-        g.setFont(small2);
-        g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1))/2, (B_HEIGHT/2) - 50);
         
         String msg2 = "Player 2 Score =  "+((snakes[1].length-2)*10);
         

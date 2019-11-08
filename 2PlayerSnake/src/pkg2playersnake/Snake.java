@@ -48,29 +48,25 @@ public class Snake{
             left = true;
             right = false;
             up = false;
-            down = false;
-            System.out.println("left");
+            down = false;;
         }
         if (key == rightKey){
             right = true;
             left = false;
             up = false;
             down = false;
-            System.out.println("right");
         }
         if (key == upKey){
             up = true;
             down = false;
             right = false;
             left = false;
-            System.out.println("up");
         }
         if (key == downKey){
             down = true;
             up = false;
             right = false;
             left = false;
-            System.out.println("down");
             }
         }
     }
