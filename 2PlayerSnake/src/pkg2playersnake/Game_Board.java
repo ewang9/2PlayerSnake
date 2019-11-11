@@ -41,6 +41,7 @@ public class Game_Board extends JPanel implements ActionListener{
     private Image head2;
     
     Snake[] snakes = new Snake[2];
+    String winner = "";
     
     public Game_Board(Snake player1, Snake player2){
         snakes[0] = player1;

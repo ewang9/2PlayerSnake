@@ -25,6 +25,7 @@ public class Snake{
     int downKey;
     int leftKey;
     int rightKey;
+    String name;
     public Snake(int up, int left, int down, int right){
         upKey = up;
         downKey = down;
