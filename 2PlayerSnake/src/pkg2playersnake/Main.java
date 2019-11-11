@@ -9,6 +9,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 public class Main extends JFrame {
+
     
     public Main(Snake s1, Snake s2){
         initUI(s1, s2);
@@ -24,12 +25,20 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
+         String player1;
+    String player2;
+        EventQueue.invokeLater(() -> {
+            JFrame ex = new WelcomeScreen();
+            
+            ex.setVisible(true);
+        });
         
         Snake snake1 = new Snake(87,65,83,68);
         Snake snake2 = new Snake(38,37,40,39);
+        
         EventQueue.invokeLater(() -> {
-            JFrame ex = new Main(snake1, snake2);
-            ex.setVisible(true);
+            JFrame main = new Main(snake1, snake2);
+            main.setVisible(true);
             
         });
     
