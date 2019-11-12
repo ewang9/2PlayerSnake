@@ -79,12 +79,14 @@ public class Game_Board extends JPanel implements ActionListener{
 }
     private void initGame(){
         
-        for (Snake i: snakes) {
-            for (int z = 0; z < i.length; z++){
-                i.SnakeX[z] = 50 - z *10;
-                i.SnakeY[z] = 50;
+            for (int z = 0; z < snakes[0].length; z++){
+                snakes[0].SnakeX[z] = 50 - z *10;
+                snakes[0].SnakeY[z] = 50;
             }
-        }
+            for (int z = 0; z < snakes[1].length; z++){
+                snakes[1].SnakeX[z] = 400 - z *10;
+                snakes[1].SnakeY[z] = 50;
+            }
         locateApple();
         
         timer = new Timer(DELAY, this);
@@ -140,7 +142,11 @@ public class Game_Board extends JPanel implements ActionListener{
         
         g.setColor(Color.white);
         g.setFont(small2);
-        g.drawString(msg2, (B_WIDTH - metr1.stringWidth(msg2))/2, (B_HEIGHT/2) - 100);
+        g.drawString(msg2, (B_WIDTH - metr1.stringWidth(msg2)+ 30)/2, (B_HEIGHT/2) - 100);
+        
+        g.setColor(Color.white);
+        g.setFont(small);
+        g.drawString(winner + " wins", (B_WIDTH - metr.stringWidth(msg))/2, (B_HEIGHT / 2)+50);
         
     }
     private void checkApple(){
@@ -173,29 +179,79 @@ public class Game_Board extends JPanel implements ActionListener{
         }
 }
     private void checkCollision(){
-        for (Snake i: snakes) {
-            for (int z = i.length; z>0; z--){
-                if ((z>4)&&(i.SnakeX[0] == i.SnakeX[z])&& (i.SnakeY[0] == i.SnakeY[z])){
+            for (int z = snakes[0].length; z>0; z--){
+                if ((z>4)&&(snakes[0].SnakeX[0] == snakes[0].SnakeX[z])&& (snakes[0].SnakeY[0] == snakes[0].SnakeY[z])){
                     inGame = false;
+                    winner = "Player 2";
                 }
             }
-            if (i.SnakeY[0] >= B_HEIGHT){
+            if (snakes[0].SnakeY[0] >= B_HEIGHT){
                 inGame = false;
+                winner = "Player 2";
             }
-            if (i.SnakeY[0] < 0){
+            if (snakes[0].SnakeY[0] < 0){
                 inGame = false;
+                winner = "Player 2";
             }
-            if (i.SnakeX[0] >= B_WIDTH){
+            if (snakes[0].SnakeX[0] >= B_WIDTH){
                 inGame = false;
+                winner = "Player 2";
             }
-            if (i.SnakeX[0] < 0){
+            if (snakes[0].SnakeX[0] < 0){
                 inGame = false;
+                winner = "Player 2";
+            }
+            
+            for (int z = snakes[1].length; z>0; z--){
+                if ((z>4)&&(snakes[1].SnakeX[0] == snakes[1].SnakeX[z])&& (snakes[1].SnakeY[0] == snakes[1].SnakeY[z])){
+                    inGame = false;
+                    winner = "Player 1";
+                }
+            }
+            if (snakes[1].SnakeY[0] >= B_HEIGHT){
+                inGame = false;
+                winner = "Player 1";
+            }
+            if (snakes[1].SnakeY[0] < 0){
+                inGame = false;
+                winner = "Player 1";
+            }
+            if (snakes[1].SnakeX[0] >= B_WIDTH){
+                inGame = false;
+                winner = "Player 1";
+            }
+            if (snakes[1].SnakeX[0] < 0){
+                inGame = false;
+                winner = "Player 1";
             }
             if (!inGame){
                 timer.stop();
             }
+            
+        for (int i = 0;i<snakes[1].length;i++){
+            if (snakes[0].SnakeX[0]==snakes[1].SnakeX[i] && snakes[0].SnakeY[0]==snakes[1].SnakeY[i]){
+                winner = "Player 2";
+                inGame = false;
+                timer.stop();
+                break;
+            }
         }
-        
+        for (int i = 0;i<snakes[0].length;i++){
+            if (snakes[1].SnakeX[0]==snakes[0].SnakeX[i] && snakes[1].SnakeY[0]==snakes[0].SnakeY[i]){
+                winner = "Player 1";
+                inGame = false;
+                timer.stop();
+                break;
+            }
+        }
+        for (int i = 0; i<snakes.length;i++) {
+            if(snakes[i].length >= 4){
+                winner = "Player " + (i+1);
+                inGame = false;
+                timer.stop();
+                break;
+            }
+        }
 }
     private void locateApple(){
         int r = (int) (Math.random() * RAND_POS);

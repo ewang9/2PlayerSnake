@@ -26,12 +26,12 @@ public class Main extends JFrame {
     }
     public static void main(String[] args) {
          String player1;
-    String player2;
-        EventQueue.invokeLater(() -> {
-            JFrame ex = new WelcomeScreen();
-            
-            ex.setVisible(true);
-        });
+        String player2;
+//        EventQueue.invokeLater(() -> {
+//            JFrame ex = new WelcomeScreen();
+//            
+//            ex.setVisible(true);
+//        });
         
         Snake snake1 = new Snake(87,65,83,68);
         Snake snake2 = new Snake(38,37,40,39);
