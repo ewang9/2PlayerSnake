@@ -112,6 +112,21 @@ public class Game_Board extends JPanel implements ActionListener{
                     }
                 }
             }
+        String msg1 = "PLAYER 1: "+((snakes[0].length-2)*10);
+        Font medium = new Font("Helvetica", Font.BOLD, 14);
+        FontMetrics metr1 = getFontMetrics(medium);
+        
+        g.setColor(Color.red);
+        g.setFont(medium);
+        g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1) - 340)/2, (B_HEIGHT/2) - 200);
+        
+        String msg2 = "PLAYER 2: "+((snakes[1].length-2)*10);
+        FontMetrics metr2 = getFontMetrics(medium);
+        
+        g.setColor(Color.blue);
+        g.setFont(medium);
+        g.drawString(msg2, (B_WIDTH - metr1.stringWidth(msg2) + 338)/2, (B_HEIGHT/2) - 200);
+
             Toolkit.getDefaultToolkit().sync();
         }else{
             gameOver(g);
@@ -129,24 +144,31 @@ public class Game_Board extends JPanel implements ActionListener{
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg))/2, B_HEIGHT / 2);
         
         String msg1 = "Player 1 Score =  "+((snakes[0].length-2)*10);
-        Font small2 = new Font("Times New Roman", Font.BOLD, 12);
+        Font small1 = new Font("Times New Roman", Font.BOLD, 12);
         FontMetrics metr1 = getFontMetrics(small);
         
         g.setColor(Color.red);
-        g.setFont(small2);
+        g.setFont(small1);
         g.drawString(msg1, (B_WIDTH - metr1.stringWidth(msg1) + 30)/2, (B_HEIGHT/2) - 65);
-       
-        
         
         String msg2 = "Player 2 Score =  "+((snakes[1].length-2)*10);
+        FontMetrics metr2 = getFontMetrics(small);
         
-        g.setColor(Color.white);
-        g.setFont(small2);
-        g.drawString(msg2, (B_WIDTH - metr1.stringWidth(msg2)+ 30)/2, (B_HEIGHT/2) - 100);
+        g.setColor(Color.blue);
+        g.setFont(small1);
+        g.drawString(msg2, (B_WIDTH - metr2.stringWidth(msg2) + 30)/2, (B_HEIGHT/2) - 50);
         
+        String msg3 = "Press ENTER to play again.";
+        Font large = new Font("Times New Roman", Font.BOLD, 18);
+        FontMetrics metr3 = getFontMetrics(large);
+        
+        g.setColor(Color.yellow);
+        g.setFont(large);
+        g.drawString(msg3, (B_WIDTH - metr3.stringWidth(msg3) + 16)/2, (B_HEIGHT/2) + 75);
+
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(winner + " wins", (B_WIDTH - metr.stringWidth(msg))/2, (B_HEIGHT / 2)+50);
+        g.drawString(winner + " wins!", (B_WIDTH - metr.stringWidth(msg) - 10)/2, (B_HEIGHT / 2) + 40);
         
     }
     private void checkApple(){
