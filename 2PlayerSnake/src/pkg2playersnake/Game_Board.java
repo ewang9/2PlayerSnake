@@ -324,7 +324,6 @@ private class TAdapter extends KeyAdapter {
             if (!inGame) {
             	int key = e.getKeyCode();
             	if (key == KeyEvent.VK_ENTER) {
-            		System.out.println(key);
             		initGame();
             	}
             }
