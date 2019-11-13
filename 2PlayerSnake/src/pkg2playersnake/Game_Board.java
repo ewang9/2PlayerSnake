@@ -88,6 +88,7 @@ public class Game_Board extends JPanel implements ActionListener{
                 snakes[1].SnakeY[z] = 50;
             }
         locateApple();
+        inGame = true;
         
         timer = new Timer(DELAY, this);
         timer.start();
@@ -103,15 +104,20 @@ public class Game_Board extends JPanel implements ActionListener{
     private void doDrawing(Graphics g){
         if (inGame){
             g.drawImage(apple, apple_x, apple_y, 20, 20, this);
-            for (Snake i: snakes) {
-                for (int z = 0; z<i.length; z++){
+                for (int z = 0; z<snakes[0].length; z++){
                     if (z==0){
-                        g.drawImage(head, i.SnakeX[z], i.SnakeY[z],25, 25, this);
+                        g.drawImage(head, snakes[0].SnakeX[z], snakes[0].SnakeY[z],25, 25, this);
                     }else{
-                        g.drawImage(ball, i.SnakeX[z], i.SnakeY[z], 15,15,  this);
+                        g.drawImage(ball, snakes[0].SnakeX[z], snakes[0].SnakeY[z], 15,15,  this);
                     }
                 }
-            }
+                for (int z = 0; z<snakes[1].length; z++){
+                    if (z==0){
+                        g.drawImage(head2, snakes[1].SnakeX[z], snakes[1].SnakeY[z],25, 25, this);
+                    }else{
+                        g.drawImage(ball2, snakes[1].SnakeX[z], snakes[1].SnakeY[z], 15,15,  this);
+                    }
+                }
         String msg1 = "PLAYER 1: "+((snakes[0].length-2)*10);
         Font medium = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr1 = getFontMetrics(medium);
@@ -169,6 +175,8 @@ public class Game_Board extends JPanel implements ActionListener{
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(winner + " wins!", (B_WIDTH - metr.stringWidth(msg) - 10)/2, (B_HEIGHT / 2) + 40);
+        
+        
         
     }
     private void checkApple(){
@@ -246,9 +254,7 @@ public class Game_Board extends JPanel implements ActionListener{
                 inGame = false;
                 winner = "Player 1";
             }
-            if (!inGame){
-                timer.stop();
-            }
+            
             
         for (int i = 0;i<snakes[1].length;i++){
             if (snakes[0].SnakeX[0]==snakes[1].SnakeX[i] && snakes[0].SnakeY[0]==snakes[1].SnakeY[i]){
@@ -262,17 +268,25 @@ public class Game_Board extends JPanel implements ActionListener{
             if (snakes[1].SnakeX[0]==snakes[0].SnakeX[i] && snakes[1].SnakeY[0]==snakes[0].SnakeY[i]){
                 winner = "Player 1";
                 inGame = false;
-                timer.stop();
                 break;
             }
         }
         for (int i = 0; i<snakes.length;i++) {
-            if(snakes[i].length >= 4){
+            if(snakes[i].length >= 5){
                 winner = "Player " + (i+1);
                 inGame = false;
-                timer.stop();
                 break;
             }
+        }
+        if (!inGame){
+        	for (Snake i : snakes) {
+        		i.up = false;
+        		i.down = false;
+        		i.left = false;
+        		i.right = false;
+        		i.length = 2;
+        	}
+            timer.stop();
         }
 }
     private void locateApple(){
@@ -292,6 +306,7 @@ public class Game_Board extends JPanel implements ActionListener{
             repaint();
     }
     
+
 private class TAdapter extends KeyAdapter {
     
     Snake snake1;
@@ -304,8 +319,17 @@ private class TAdapter extends KeyAdapter {
     
     @Override
     public void keyPressed(KeyEvent e){
-            snake1.keyPressed(e);
+        if (inGame) {
+        	snake1.keyPressed(e);
             snake2.keyPressed(e);
+        }
+            if (!inGame) {
+            	int key = e.getKeyCode();
+            	if (key == KeyEvent.VK_ENTER) {
+            		System.out.println(key);
+            		initGame();
+            	}
+            }
         }
     }
 }

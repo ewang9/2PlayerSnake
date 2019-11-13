@@ -20,7 +20,7 @@ public class Snake{
     boolean left = false;
     boolean right = false;
     int points; 
-    int maxSize = 900;
+    int maxSize = 20;
     int upKey;
     int downKey;
     int leftKey;

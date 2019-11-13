@@ -39,7 +39,6 @@ public class Main extends JFrame {
         EventQueue.invokeLater(() -> {
             JFrame main = new Main(snake1, snake2);
             main.setVisible(true);
-            
         });
     
     }
