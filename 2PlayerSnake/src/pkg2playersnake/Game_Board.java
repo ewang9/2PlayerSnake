@@ -176,7 +176,15 @@ public class Game_Board extends JPanel implements ActionListener{
         g.setFont(small);
         g.drawString(winner + " wins!", (B_WIDTH - metr.stringWidth(msg) - 10)/2, (B_HEIGHT / 2) + 40);
         
-        
+        for (Snake i : snakes) {
+        		i.up = false;
+        		i.down = false;
+        		i.left = false;
+        		i.right = false;
+        		i.length = 2;
+        	}
+            timer.stop();
+
         
     }
     private void checkApple(){
@@ -260,7 +268,6 @@ public class Game_Board extends JPanel implements ActionListener{
             if (snakes[0].SnakeX[0]==snakes[1].SnakeX[i] && snakes[0].SnakeY[0]==snakes[1].SnakeY[i]){
                 winner = "Player 2";
                 inGame = false;
-                timer.stop();
                 break;
             }
         }
@@ -278,16 +285,7 @@ public class Game_Board extends JPanel implements ActionListener{
                 break;
             }
         }
-        if (!inGame){
-        	for (Snake i : snakes) {
-        		i.up = false;
-        		i.down = false;
-        		i.left = false;
-        		i.right = false;
-        		i.length = 2;
-        	}
-            timer.stop();
-        }
+
 }
     private void locateApple(){
         int r = (int) (Math.random() * RAND_POS);
