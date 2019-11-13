@@ -14,18 +14,21 @@ import java.awt.event.KeyEvent;
 public class Snake{
     int[] SnakeX;
     int[] SnakeY;
+    //The location of each body part of the snake
     int length = 2;
+    //Length of the snake
     boolean up = false;
     boolean down = false;
     boolean left = false;
     boolean right = false;
-    int points; 
+    //Which way the snake is moving
     int maxSize = 20;
+    //Maximum size of the snake
     int upKey;
     int downKey;
     int leftKey;
     int rightKey;
-    String name;
+    //KeyEvent keycodes for each button in the controls
     public Snake(int up, int left, int down, int right){
         upKey = up;
         downKey = down;
@@ -34,11 +37,13 @@ public class Snake{
         SnakeX = new int[maxSize];
         SnakeY = new int[maxSize];
     }
+    //Constructor initializes snake object with set controls and a max size for the length of the snake
     
     
     public void keyPressed(KeyEvent ev){
         
         int key = ev.getKeyCode();
+        //When a key is pressed, this gets the keycode to tell what key was pressed
         
         if (key == leftKey){
             left = true;
@@ -64,5 +69,6 @@ public class Snake{
             right = false;
             left = false;
             }
+        //Set the direction of movement of the snake based on what key was pressed
         }
     }
