@@ -10,10 +10,11 @@ package pkg2playersnake;
  * @author S331460873
  */
 public class WelcomeScreen extends javax.swing.JFrame {
-
     /**
      * Creates new form WelcomeScreen
      */
+    String name1;
+    String name2;
     public WelcomeScreen() {
         initComponents();
     }
@@ -27,7 +28,6 @@ public class WelcomeScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSpinner1 = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -153,7 +153,9 @@ public class WelcomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //Start the game
+        name1 = jTextField1.getText();
+        name2 = jTextField2.getText();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -198,7 +200,6 @@ public class WelcomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
