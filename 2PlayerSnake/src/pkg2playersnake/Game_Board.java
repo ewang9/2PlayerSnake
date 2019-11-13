@@ -308,7 +308,7 @@ public class Game_Board extends JPanel implements ActionListener{
         }
         //If player 2 head collides with player 1, player 1 wins
         for (int i = 0; i<snakes.length;i++) {
-            if(snakes[i].length >= 10){
+            if(snakes[i].length >= 12){
                 winner = "Player " + (i+1);
                 inGame = false;
                 break;
